@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL // ACCESS_HUB</title>
+    <style>
+        /* Hacker Theme Styling */
+        body { 
+            background-color: #000000; 
+            color: #00ff41; 
+            font-family: 'Courier New', Courier, monospace; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card { 
+            background: #050505; 
+            padding: 40px; 
+            border: 1px solid #00ff41; 
+            border-radius: 2px; 
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); 
+            text-align: center; 
+            width: 350px;
+            z-index: 3;
+            position: relative;
+        }
+
+        h1 { font-size: 1.1rem; margin-bottom: 30px; letter-spacing: 3px; text-shadow: 0 0 8px #00ff41; }
+
+        input { 
+            width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid #003b11; 
+            color: #00ff41; outline: none; font-family: 'Courier New', Courier, monospace; text-align: center;
+        }
+
+        button { 
+            width: 100%; padding: 15px; background-color: transparent; color: #00ff41; border: 1px solid #00ff41; 
+            font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: all 0.2s ease;
+        }
+
+        button:hover { background-color: #00ff41; color: #000; box-shadow: 0 0 20px #00ff41; }
+
+        #status { margin-top: 25px; font-size: 9px; color: #003b11; transition: color 0.3s; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>[ COMMAND_CENTER ]</h1>
+    <input type="number" id="numberInput" placeholder="INPUT_KEY_ID...">
+    <button onclick="checkAndPlay()">RUN_SEQUENCE</button>
+    <div id="status">SYSTEM_READY // ENCRYPTION_ACTIVE</div>
+</div>
+
+<audio id="audioFile" preload="auto">
+    <source src="https://dl.dropboxusercontent.com/scl/fi/wqyi61tgo966wracxvwcp/mota-main.ogg?rlkey=2e7iijg3snwhhq9r5iotllhm5&st=gwmxwtwb&raw=1" type="audio/ogg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    function checkAndPlay() {
+        const num = document.getElementById('numberInput').value;
+        const audio = document.getElementById('audioFile');
+        const status = document.getElementById('status');
+
+        if (num === "") {
+            alert("ALERT: NO DATA DETECTED");
+        } else {
+            // Update Status Text
+            status.innerText = "STATUS: BYPASSING_SECURITY...";
+            status.style.color = "#00ff41";
+
+            // Restart the audio in case it was already played
+            audio.currentTime = 0; 
+            
+            // Play with a promise check to handle browser blocks
+            audio.play().then(() => {
+                status.innerText = "STATUS: PLAYING_AUDIO_STREAM";
+                console.log("Audio playing successfully for ID: " + num);
+            }).catch(error => {
+                console.error("Playback failed:", error);
+                status.innerText = "STATUS: PLAYBACK_BLOCKED";
+                alert("Browser blocked audio. Please click 'OK' to manually start playback.");
+                // Try playing again after the alert interaction
+                audio.play();
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
