@@ -57,7 +57,7 @@
 </div>
 
 <audio id="audioFile" preload="auto">
-    <source src="https://dl.dropboxusercontent.com/scl/fi/wqyi61tgo966wracxvwcp/mota-main.ogg?rlkey=2e7iijg3snwhhq9r5iotllhm5&st=gwmxwtwb&raw=1" type="audio/ogg">
+    <source src="https://www.dropbox.com/scl/fi/xtuyl928a71inblywpfqm/.mp3?rlkey=454f4s2gjifwwxtdu9a65rwmx&st=pqnkmpjq&raw=1" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 
@@ -70,14 +70,11 @@
         if (num === "") {
             alert("ALERT: NO DATA DETECTED");
         } else {
-            // Update Status Text
             status.innerText = "STATUS: BYPASSING_SECURITY...";
             status.style.color = "#00ff41";
 
-            // Restart the audio in case it was already played
             audio.currentTime = 0; 
             
-            // Play with a promise check to handle browser blocks
             audio.play().then(() => {
                 status.innerText = "STATUS: PLAYING_AUDIO_STREAM";
                 console.log("Audio playing successfully for ID: " + num);
@@ -85,7 +82,6 @@
                 console.error("Playback failed:", error);
                 status.innerText = "STATUS: PLAYBACK_BLOCKED";
                 alert("Browser blocked audio. Please click 'OK' to manually start playback.");
-                // Try playing again after the alert interaction
                 audio.play();
             });
         }
